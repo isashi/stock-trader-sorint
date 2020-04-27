@@ -1,3 +1,5 @@
+import stocks from "../../data/stocks";
+
 // state
 // variabili
 const state = {
@@ -14,11 +16,31 @@ const getters = {
 
 // mutations
 // scrivere le variabili
-const mutations = {};
+const mutations = {
+  SET_STOCKS(state, stocks) {
+    state.stocks = stocks;
+  },
+  RND_STOCKS(state) {
+    state.stocks.forEach(stock => {
+      stock.price = Math.round(stock.price * (1 + Math.random() - 0.5));
+    });
+  }
+};
 
 // actions
 // metodi tramite cui interagire con mutations / getters e con API esterne
-const actions = {};
+const actions = {
+  initStocks: ({
+    commit
+  }) => {
+    commit("SET_STOCKS", stocks);
+  },
+  randomizeStocks: ({
+    commit
+  }) => {
+    commit("RND_STOCKS");
+  }
+};
 
 export default {
   state,
